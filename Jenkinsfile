@@ -17,10 +17,10 @@ node{
     }
     
     stage('Push Docker Image'){
-        withCredentials([string(credentialsId: 'Docker_Hub_Pwd', variable: 'Docker_Hub_Pwd')]) {
-          sh "docker login -u dockerhandson -p ${Docker_Hub_Pwd}"
+        withCredentials([string(credentialsId: 'Docker_Hub_Pwd', variable: 'Docker_Hub_Pwd')],[string(credentialsId: 'Docker_Hub_User', variable: 'Docker_Hub_User')]) {
+          sh "docker login -u  ${Docker_Hub_Pwd} -p ${Docker_Hub_Pwd}"
         }
-        sh 'docker push dockerhandson/java-web-app'
+        sh 'docker push  ${Docker_Hub_User}/java-web-app'
      }
      
       stage('Run Docker Image In Dev Server'){
